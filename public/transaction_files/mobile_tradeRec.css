@@ -1,0 +1,675 @@
+.t_blue {
+    color: #2625ed !important;
+}
+
+/*搜尋條件*/
+.TR_Search {
+    padding: 6% 5%;
+}
+
+    .TR_Search > div {
+        font-size: 0.9em;
+        margin-bottom: 5px;
+    }
+
+    .TR_Search select {
+        background-color: #f6f6f6;
+        border: 1px solid #ddd;
+        height: 40px;
+        line-height: 40px;
+        border-radius: 2px;
+        padding: 0 10px;
+        color: #747474;
+        margin-bottom: 15px;
+        font-weight: bold;
+        background-position-x: calc(100% - 10px);
+    }
+
+    .TR_Search input {
+        background-color: #33acff;
+        font-weight: bold;
+    }
+
+        .TR_Search input:active {
+            opacity: 0.8;
+        }
+
+@media (min-width: 400px) {
+    .TR_Search select {
+        border-radius: 3px;
+    }
+
+    .TR_Search select {
+        height: 52px;
+        line-height: 52px;
+        margin-bottom: 25px;
+    }
+}
+
+/*全選/取消/刪除*/
+.tradeRec_button {
+    position: fixed;
+    right: 4%;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    width: 37px;
+    display: none;
+}
+
+    .tradeRec_button [class*="btn_tradeRec"] {
+        width: 37px;
+        height: 37px;
+        border-radius: 100px;
+        float: left;
+        cursor: pointer;
+    }
+
+        .tradeRec_button [class*="btn_tradeRec"] + [class*="btn_tradeRec"] {
+            margin-top: 15px;
+        }
+
+.btn_tradeRecAll {
+    background-color: rgba(39,130,215,.6);
+    color: #fff;
+    font-weight: bold;
+    font-size: 0.8em;
+    text-align: center;
+    line-height: 37px;
+}
+
+    .btn_tradeRecAll.on {
+        background-color: rgba(39,130,215,1);
+    }
+
+.btn_tradeRecDelete {
+    background: rgba(255,0,0,.6) url(/images/icon_trash.svg) no-repeat center;
+    background-size: 19px auto;
+}
+
+    .btn_tradeRecDelete:active {
+        background-color: rgba(255,0,0,1);
+    }
+
+.btn_tradeRecClose {
+    background: rgba(160,160,160,.6) url(/images/btn_close_white.svg) no-repeat center;
+    background-size: 13px auto;
+}
+
+    .btn_tradeRecClose:active {
+        background-color: rgba(160,160,160,1);
+    }
+
+/*交易列表*/
+.tradeRec_list {
+    background-color: #fff;
+    margin-bottom: 12px;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+    .tradeRec_list ul {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .tradeRec_list li {
+        min-width: 50%;
+        margin: 2px 0;
+        line-height: 1.5em;
+    }
+
+        .tradeRec_list li span:not(:last-child) {
+            margin-right: 5px;
+        }
+
+.tradeRec_listT {
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 5px 4%;
+    box-sizing: border-box;
+    min-height: 48px;
+}
+
+.tradeRec_listTR_L {
+    padding-right: 3%;
+    font-size: 0.9em;
+    width: 50%;
+    box-sizing: border-box;
+    line-height: 1.2em;
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+    .tradeRec_listTR_L:not(.tRecCheck) {
+        flex-flow: wrap
+    }
+
+    .tradeRec_listTR_L span:not(:last-child) {
+        margin-right: 5px;
+    }
+
+.tradeRec_listTR_R {
+    font-size: 0.8em;
+    color: #666;
+}
+
+.tRecCheck > div {
+    display: flex;
+    flex-flow: wrap;
+}
+
+.tRecCheckbox {
+    width: 15px;
+    padding: 12px 10px 12px 5px;
+    cursor: pointer;
+}
+
+    .tRecCheckbox:before {
+        content: '';
+        width: 15px;
+        height: 15px;
+        border-radius: 100px;
+        display: block;
+        margin: auto;
+        border: 1px solid #ddd;
+        box-sizing: border-box;
+        background-color: #fff;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .tRecCheckbox.on:before {
+        background-image: url(/images/btn_confirm_blue.svg);
+        background-size: 100% auto;
+    }
+
+    .tRecCheckbox.no:before {
+        background-color: #2782d7;
+        background-image: url(/images/icon_mark.svg);
+        background-size: 55% auto;
+        width: 15px;
+        height: 15px;
+        border-color: #2782d7;
+    }
+
+.tRec_time {
+    margin-left: 5px;
+}
+
+.tradeRec_listFoot {
+    padding: 5px 4%;
+    font-size: 0.8em;
+}
+
+    .tradeRec_listFoot .tradeRecSTAT {
+        display: flex;
+        align-items: flex-start;
+    }
+
+        .tradeRec_listFoot .tradeRecSTAT > div:first-child {
+            white-space: nowrap;
+        }
+
+        .tradeRec_listFoot .tradeRecSTAT span:nth-last-child(2) {
+            margin-right: 5px;
+        }
+
+        .tradeRec_listFoot .tradeRecSTAT span:nth-child(2) {
+            display: inline-block;
+        }
+
+    .tradeRec_listFoot ul a {
+        color: #2625ed;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+.tRec_money {
+    color: #009019;
+    font-size: 1.05em;
+}
+
+.btn_detail {
+    text-decoration: underline;
+    color: #2625ed;
+    cursor: pointer;
+}
+
+.tradeRec_BTN {
+    display: flex;
+    justify-content: space-between;
+    margin: 4px auto;
+}
+
+    .tradeRec_BTN a {
+        cursor: pointer;
+        border-radius: 5px;
+        height: 30px;
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        line-height: 1em;
+    }
+
+        .tradeRec_BTN a + a {
+            margin-left: 4%;
+        }
+
+        .tradeRec_BTN a:active {
+            opacity: 0.8;
+        }
+
+        .tradeRec_BTN a:before {
+            content: '';
+            height: 16px;
+            width: 15px;
+            color: #fff;
+            background-repeat: no-repeat;
+            background-position: center top;
+            display: flex;
+            margin-right: 5px;
+        }
+
+.btn_upload {
+    background-color: #3ba0d3;
+}
+
+    .btn_upload:before {
+        background-image: url(/images/btn_upload.svg);
+        background-size: 100% auto;
+    }
+
+.btn_notice {
+    background-color: #f0595f;
+}
+
+    .btn_notice:before {
+        background-image: url(/images/btn_notice.svg);
+        background-size: 100% auto;
+    }
+
+.btn_check {
+    background-color: #40a281;
+}
+
+    .btn_check:before {
+        background-image: url(/images/btn_check.svg);
+        background-size: 100% auto;
+    }
+
+@media (min-width: 360px) {
+    .tRec_money, .tRec_date {
+        font-size: 1.2em;
+    }
+
+    .tradeRec_BTN {
+        margin: 6px auto;
+    }
+
+        .tradeRec_BTN a {
+            height: 35px;
+        }
+
+            .tradeRec_BTN a:before {
+                height: 18px;
+                width: 18px;
+            }
+
+    .btn_upload:before {
+        height: 19px !important;
+    }
+}
+
+@media (min-width: 400px) {
+    .tradeRec_list {
+        margin-bottom: 15px;
+    }
+
+    .tradeRec_listT {
+        min-height: 60px;
+    }
+
+    .tRecCheckbox {
+        padding: 17px 15px 17px 10px;
+    }
+
+    .tradeRec_listFoot {
+        padding: 8px 4%;
+    }
+
+    .tradeRec_BTN {
+        margin: 8px auto;
+    }
+
+        .tradeRec_BTN a {
+            height: 40px;
+        }
+
+            .tradeRec_BTN a:before {
+                height: 20px;
+                width: 20px;
+            }
+
+    .btn_upload:before {
+        height: 22px !important;
+    }
+}
+
+/*上傳明細*/
+.depositDet_upload {
+    background-color: #fff;
+    padding-bottom: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.DDU_text {
+    max-width: calc(100% - 2.5em);
+    margin-bottom: 1em;
+    text-align: center;
+}
+
+    .DDU_text a {
+        margin-top: 5px;
+        display: block;
+        color: #2625ed;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+.DDU_box {
+    width: calc(100% - 2em);
+    border: 1px solid #747474;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-flow: wrap;
+    align-items: center;
+    min-height: 140px;
+}
+
+.DDU_boxIn {
+    text-align: center;
+    width: 100%;
+}
+
+.btn_DDU {
+    box-sizing: border-box;
+    width: 100%;
+    height: 69px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 7%;
+}
+
+    .btn_DDU + .btn_DDU {
+        border-top: 1px solid #c4c4c4;
+    }
+
+    .btn_DDU:active {
+        background-color: #f6f6f6;
+    }
+
+    .btn_DDU img {
+        height: 32%;
+        width: auto;
+    }
+
+.DDU_loadingText {
+    color: #686767;
+}
+
+.DDU_loading {
+    border: 1px solid #5a89d5;
+    border-radius: 2px;
+    width: 70%;
+    height: 12px;
+    margin: 10px auto 20px;
+    overflow: hidden;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.DDU_loadingBar {
+    background-color: #5a89d5;
+    height: 100%;
+    float: left;
+}
+
+.DDU_detail_img {
+    width: auto;
+    height: auto;
+    max-width: calc(100% - 10px);
+    max-height: 275px;
+    display: block;
+    margin: 5px auto;
+}
+
+@media (min-width: 350px) {
+    .DDU_detail_img {
+        max-height: 320px;
+    }
+}
+
+@media (min-width: 400px) {
+    .DDU_detail_img {
+        max-height: 360px;
+    }
+}
+
+@media (min-width: 530px) {
+    .DDU_detail_img {
+        max-height: 375px;
+    }
+}
+
+@media (min-width: 600px) {
+    .DDU_detail_img {
+        max-height: 400px;
+    }
+}
+
+@media (min-width: 768px) {
+    .DDU_detail_img {
+        max-height: 450px;
+    }
+}
+
+/*交易记录-选择类别*/
+.sortBox { /*-*/
+    box-sizing: border-box;
+    height: 30px;
+    border-radius: 100px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    font-size: 0.8em;
+    line-height: 1em;
+    width: 23%;
+    max-width: 160px;
+    margin-right: 4.5%;
+    padding-right: 25px;
+    padding-left: 10px;
+    border: 1px solid #c6c6ca;
+}
+
+    .sortBox:after {
+        content: '';
+        background: url(/images/icon_arrow.svg) no-repeat center;
+        background-size: 90% auto;
+        width: 13px;
+        height: 13px;
+        position: absolute;
+        right: 7px;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+    }
+
+    .sortBox.on:after {
+        -webkit-transform: rotate( 180deg);
+        transform: rotate( 180deg);
+    }
+
+    .sortBox.on div {
+        display: block;
+    }
+
+    .sortBox div {
+        display: none;
+        position: absolute;
+        background-color: #fff;
+        border-radius: 5px;
+        min-width: 135px;
+        top: 42px;
+        left: -1px;
+        padding: 0 5px;
+        box-shadow: 2px 2px 5px rgba(0,0,0,.2);
+        box-sizing: border-box;
+    }
+
+        .sortBox div:before {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 7px solid transparent;
+            border-right: 7px solid transparent;
+            border-bottom: 7px solid #fff;
+            position: absolute;
+            top: -7px;
+            left: 10px;
+            -webkit-filter: drop-shadow(0 -1px 0 rgba(0,0,0,.05));
+            filter: drop-shadow(0 -1px 0 rgba(0,0,0,.05));
+        }
+
+    .sortBox label {
+        display: flex;
+        align-items: center;
+        height: 40px;
+        width: 100%;
+        padding: 0 5px 0 35px;
+        position: relative;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        box-sizing: border-box;
+        text-align: left;
+    }
+
+        .sortBox label:first-child {
+            border-bottom: 1px solid #f2f2f2;
+        }
+
+    .sortBox input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+
+        .sortBox input:checked ~ .btn_sort:after {
+            display: block;
+        }
+
+    .sortBox .btn_sort {
+        position: absolute;
+        left: 5px;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        height: 20px;
+        width: 20px;
+        background-color: #fff;
+        border: 1px solid #f2f2f2;
+        border-radius: 5px;
+    }
+
+        .sortBox .btn_sort:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        .sortBox .btn_sort:after {
+            left: 7px;
+            top: 3px;
+            width: 4px;
+            height: 8px;
+            border: solid #32aaff;
+            border-width: 0 3px 3px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+
+    .sortBox ~ h3 { /*-*/
+        white-space: nowrap;
+    }
+
+@media (min-width: 350px) {
+    .sortBox {
+        line-height: 0.85em;
+    }
+
+        .sortBox:after {
+            right: 8px;
+        }
+}
+
+@media (min-width: 375px) {
+    .sortBox {
+        line-height: 0.8em;
+    }
+
+        .sortBox:after {
+            right: 10px;
+        }
+}
+
+@media (min-width: 400px) {
+    .sortBox div {
+        min-width: 155px;
+    }
+
+    .sortBox label {
+        height: 45px;
+        padding: 0 5px 0 35px;
+    }
+}
+
+@media (min-width: 530px) {
+    .sortBox { /*-*/
+        margin-right: 6%;
+        width: 32%;
+    }
+
+        .sortBox div {
+            min-width: 100%;
+        }
+}
+
+@media (min-width: 768px) { /*-*/
+    .sortBox {
+        margin-right: calc(33% - 160px);
+    }
+}

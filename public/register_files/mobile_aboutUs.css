@@ -1,0 +1,312 @@
+/*关于我们/服務條款*/
+.desc {
+    width: 100%;
+    background-color: #fff;
+    padding: 12px 6%;
+    box-sizing: border-box;
+}
+
+.desc_list {
+    color: #535353;
+    font-size: 0.8em;
+    line-height: 1.7em;
+    text-align: justify;
+    margin-bottom: 20px;
+}
+
+    .desc_list:nth-last-child(1) {
+        margin: 0;
+    }
+
+.desc_listT {
+    font-weight: normal;
+    color: #2782d7;
+    margin: 0;
+    font-size: 1em;
+}
+
+.descNum_list li {
+    list-style: decimal;
+    margin-left: 15px;
+}
+
+@media (min-width: 400px) {
+    .desc {
+        padding: 15px 6%;
+    }
+
+    .desc_list {
+        font-size: 0.75em;
+    }
+}
+
+/*关于我们-牌照展示*/
+.license {
+    padding-top: 12px;
+}
+
+.licenseImg {
+    text-align: center;
+    font-size: 1.3em;
+    margin-bottom: 20px;
+    color: #898989;
+}
+
+    .licenseImg img {
+        width: 62%;
+        display: block;
+        margin: 0 auto 3px;
+    }
+
+.license_list {
+    background-color: #fff;
+    margin-bottom: 12px;
+    position: relative;
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+}
+
+.license_listT {
+    font-weight: normal;
+    margin: 0;
+    font-size: 1.05em;
+}
+
+.license_list:nth-last-child(1) {
+    margin-bottom: 0;
+}
+
+.license_listImg {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 8%;
+    margin: auto 0;
+    width: auto;
+    height: 85%;
+}
+
+.license_arrow {
+    position: relative;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+}
+
+    .license_arrow:after {
+        content: "";
+        background: url(/Areas/Mobile/Content/images/icon_arrow.svg) no-repeat center;
+        background-size: 100% auto;
+        position: absolute;
+        right: 4%;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        width: 15px;
+        height: 15px;
+    }
+
+    .license_arrow.on:after {
+        -webkit-transform: rotate( 180deg);
+        transform: rotate( 180deg);
+    }
+
+.license_listIn {
+    text-align: left;
+    padding: 20px 6%;
+    line-height: 1.7em;
+    font-size: 0.8em;
+    color: #535353;
+    display: none;
+}
+
+.licenseFCimg {
+    margin: 0 auto;
+    width: 65%;
+    height: auto;
+    display: block;
+    max-width: 300px;
+}
+
+@media (min-width: 400px) {
+    .license {
+        padding-top: 15px;
+    }
+
+    .license_list {
+        line-height: 65px;
+        margin-bottom: 15px;
+    }
+
+    .license_listIn {
+        font-size: 0.75em;
+    }
+}
+
+/*場館介紹*/
+.venueInfo {
+    width: 100%;
+    background-color: #000;
+    box-sizing: border-box;
+}
+
+.venueInfo_video {
+    width: 100%;
+    height: 0;
+    padding-top: 56%;
+    position: relative;
+}
+
+    .venueInfo_video video, .venueInfo_video img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: auto;
+        margin: auto;
+    }
+
+        .venueInfo_video video:focus {
+            outline: none;
+        }
+
+.venueInfo h2 {
+    margin: 0;
+    text-align: center;
+    font-size: 1em;
+    padding: 5%;
+}
+
+@media (min-width: 768px) {
+    .venueInfo h2 {
+        font-size: 1.3em;
+    }
+}
+
+/*官方视频*/
+.venueInfo_In {
+    width: 92%;
+    margin: 40px auto 0;
+    padding-top: 60%;
+    display: flex;
+    justify-content: stretch;
+    flex-wrap: wrap;
+}
+
+    .venueInfo_In > li {
+        cursor: pointer;
+        position: relative;
+        display: flex;
+        margin-bottom: 4%;
+        background-color: #fff;
+        flex-flow: column;
+    }
+
+        .venueInfo_In > li:not(.w100) {
+            width: 48%;
+        }
+
+        .venueInfo_In > li.w100 ~ li:nth-child(odd),
+        .venueInfo_In > li:first-child:not(.w100) ~ li:nth-child(even) {
+            margin-left: 4%;
+        }
+
+        .venueInfo_In > li.on .venueInfo_video:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .venueInfo_In > li.on .btn_play {
+            display: block;
+        }
+
+    .venueInfo_In .venueInfo {
+        height: 24.5vw;
+        overflow: hidden;
+    }
+
+    .venueInfo_In .venueInfo_video {
+        padding-top: 24.5vw;
+    }
+
+.btn_play {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    width: 30px;
+    height: 30px;
+    background: url(/Areas/Mobile/Content/images/icon_play.svg) no-repeat center;
+    background-size: auto 40%;
+    z-index: 1;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    display: none;
+}
+
+.venueInfoBtm {
+    width: 100%;
+    padding: 5px 8px;
+    box-sizing: border-box;
+}
+
+.venueInfoName {
+    width: 100%;
+    font-size: 0.8em;
+    font-weight: bold;
+    line-height: 1.2em;
+    text-align: center;
+}
+
+.venueInfoTime {
+    font-size: 0.7em;
+    margin-top: 3px;
+    color: #ccc;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (min-width: 400px) {
+    .btn_play {
+        width: 35px;
+        height: 35px;
+    }
+
+    .venueInfoBtm {
+        padding: 8px 10px;
+    }
+
+    .venueInfoTime {
+        margin-top: 5px;
+    }
+}
+
+@media (min-width: 530px) {
+    .btn_play {
+        width: 45px;
+        height: 45px;
+    }
+
+    .venueInfoBtm {
+        padding: 10px 15px;
+    }
+}
+
+@media (min-width: 768px) {
+    .btn_play {
+        width: 60px;
+        height: 60px;
+        border-width: 3px;
+    }
+}
