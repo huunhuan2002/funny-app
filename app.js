@@ -5,10 +5,12 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var ejs = require('ejs');
 var cookieSession = require('cookie-session')
+var MobileDetect = require('mobile-detect')
 
 var indexRouter = require('./routes/index');
 var authsRouter = require('./routes/auth');
 var paymentRouter = require('./routes/payment');
+var mobileRouter = require('./routes/mobile');
 
 var app = express();
 
@@ -38,9 +40,21 @@ const authMid = function (req, res, next) {
   }
 }
 
-app.use('/', indexRouter);
+const osDetectMid = function (req, res, next) {
+  const md = new MobileDetect(req.headers['user-agent']);
+  const isCurrentMobilePath = req.path && req.path.includes('mobile');
+  const isMobile = (md.phone() || md.tablet() || md.phone()) && !isCurrentMobilePath;
+  if (isMobile) {
+    res.redirect('/mobile');
+  } else {
+    next();
+  }
+}
+
+app.use('/', osDetectMid, indexRouter);
 app.use('/auth', authsRouter);
 app.use('/payment', authMid, paymentRouter);
+app.use('/mobile', mobileRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -2166,7 +2166,7 @@ corresponds to the arrow we want to display */
 }
 
 #fancybox-loading, .fancybox-close, .fancybox-prev span, .fancybox-next span {
-    background-image: url(../Content/Images/Graph/icon_close.html);
+    background-image: url(../images/icon_close.html);
     background-repeat: no-repeat;
     background-position: center;
     background-size: 20px 20px; /*The size of the normal image, half the size of the hi-res image*/
@@ -2359,14 +2359,14 @@ corresponds to the arrow we want to display */
 /*Retina graphics!*/
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5) {
     #fancybox-loading, .fancybox-close, .fancybox-prev span, .fancybox-next span {
-        background-image: url(../Content/Images/Graph/icon_close.html);
+        background-image: url(../images/icon_close.html);
         background-repeat: no-repeat;
         background-position: center;
         background-size: 20px 20px; /*The size of the normal image, half the size of the hi-res image*/
     }
 
         #fancybox-loading div {
-            background-image: url(../Content/Images/Graph/icon_close.html);
+            background-image: url(../images/icon_close.html);
             background-repeat: no-repeat;
             background-position: center;
             background-size: 20px 20px; /*The size of the normal image, half the size of the hi-res image*/
