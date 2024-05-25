@@ -17,6 +17,14 @@ var router = express.Router();
 //   })
 // }
 
+const authMid = function (req, res, next) {
+  if (!req.session.username) {
+    res.redirect('/');
+  } else {
+    next();
+  }
+}
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   const isLoggedIn = req.session.isLoggedIn;
@@ -29,7 +37,7 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express', isLoggedIn, username, linkGame, loggedClass, profileLink, transactionLink });
 });
 
-router.get('/profile', function(req, res, next) {
+router.get('/profile', authMid, function(req, res, next) {
   res.render('profile', { title: 'Express' });
 });
 
@@ -37,7 +45,7 @@ router.get('/promotion', function(req, res, next) {
   res.render('promotion', { title: 'Express' });
 });
 
-router.get('/recharge', function(req, res, next) {
+router.get('/recharge', authMid, function(req, res, next) {
   res.render('recharge', { title: 'Express' });
 });
 
@@ -49,7 +57,7 @@ router.get('/support', function(req, res, next) {
   res.render('support', { title: 'Express' });
 });
 
-router.get('/transaction', function(req, res, next) {
+router.get('/transaction', authMid, function(req, res, next) {
   res.render('transaction', { title: 'Express' });
 });
 
