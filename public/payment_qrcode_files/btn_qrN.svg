@@ -1,0 +1,43 @@
+<svg xmlns:x="http://ns.adobe.com/Extensibility/1.0/" xmlns:i="http://ns.adobe.com/AdobeIllustrator/10.0/" xmlns:graph="http://ns.adobe.com/Graphs/1.0/" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" version="1.1" id="圖層_1" x="0px" y="0px" width="100" height="100" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
+<style type="text/css">
+<![CDATA[
+	.st0{opacity:0.8;fill:#38C6B5;}
+	.st1{fill:#FFFFFF;}
+	.st2{fill:#3B3B3B;}
+]]>
+</style>
+<metadata>
+	<sfw xmlns="http://ns.adobe.com/SaveForWeb/1.0/">
+		<slices/>
+		<sliceSourceBounds height="80" width="80" y="-14.5" x="-15.5" bottomLeftOrigin="true"/>
+	</sfw>
+</metadata>
+<g>
+	<ellipse class="st2" cx="26.7" cy="26.4" rx="6.3" ry="6.3"/>
+	<ellipse class="st2" cx="74.2" cy="26.4" rx="6.3" ry="6.3"/>
+	<path class="st2" d="M10,42.9h32.4V10H10V42.9z M17.6,17.5h17.3v17.9H17.6V17.5z"/>
+	<rect x="47.8" y="10" class="st2" width="5" height="24.8"/>
+	<rect x="10" y="47.7" class="st2" width="27.6" height="4.8"/>
+	<path class="st2" d="M90,10H57.6v32.9H90V10z M82.5,35.4H65.1V17.5h17.3V35.4z"/>
+	<polygon class="st2" points="90,62.6 90,54.9 72.6,54.9 72.6,50.1 57.6,50.1 57.6,57.5 67.7,57.5 67.7,62.6  "/>
+	<rect x="47.7" y="70" class="st2" width="4.9" height="5.2"/>
+	<rect x="55.2" y="70" class="st2" width="4.9" height="5.2"/>
+	<rect x="62.9" y="70" class="st2" width="4.9" height="5.2"/>
+	<rect x="47.7" y="77.4" class="st2" width="4.9" height="5.2"/>
+	<rect x="55.2" y="77.4" class="st2" width="4.9" height="5.2"/>
+	<rect x="62.9" y="77.4" class="st2" width="4.9" height="5.2"/>
+	<rect x="70.3" y="70" class="st2" width="4.9" height="5.2"/>
+	<rect x="47.7" y="85" class="st2" width="17.6" height="5"/>
+	<polygon class="st2" points="82.6,65.1 82.6,82.5 70.3,82.5 70.3,90 90,90 90,83.7 90,82.5 90,65.1  "/>
+	<rect x="47.7" y="40" class="st2" width="4.9" height="14.9"/>
+	<rect x="52.6" y="59.8" class="st2" width="5" height="5.3"/>
+	<path class="st2" d="M10,90h32.4V57.1H10V90z M17.5,64.6h17.3v17.9H17.5V64.6z"/>
+	<ellipse class="st2" cx="26.6" cy="73.4" rx="6.3" ry="6.3"/>
+</g>
+<g>
+	<circle class="st0" cx="50" cy="50" r="28.8"/>
+	<g>
+		<path class="st1" d="M37.8,63.6V36h5.4l11.3,18.4V36h5.2v27.5h-5.6L43,45.6v18H37.8z"/>
+	</g>
+</g>
+</svg>

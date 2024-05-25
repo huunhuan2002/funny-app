@@ -7,8 +7,8 @@ var ejs = require('ejs');
 var cookieSession = require('cookie-session')
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 var authsRouter = require('./routes/auth');
+var paymentRouter = require('./routes/payment');
 
 var app = express();
 
@@ -30,8 +30,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+const authMid = function (req, res, next) {
+  if (!req.session.username) {
+    res.redirect('/');
+  } else {
+    next();
+  }
+}
+
 app.use('/', indexRouter);
 app.use('/auth', authsRouter);
+app.use('/payment', authMid, paymentRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

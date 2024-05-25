@@ -19,10 +19,14 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  console.log('session', req.session.isLoggedIn);
   const isLoggedIn = req.session.isLoggedIn;
   const username = req.session.username;
-  res.render('index', { title: 'Express', isLoggedIn, username });
+
+  const linkGame = isLoggedIn ? `https://www.vb9553v.net/` : '#';
+  const profileLink = isLoggedIn ? '/profile' : '#';
+  const transactionLink = isLoggedIn ? '/transaction' : '#';
+  const loggedClass = isLoggedIn ? 'isLoggedIn' : 'notLoggedIn';
+  res.render('index', { title: 'Express', isLoggedIn, username, linkGame, loggedClass, profileLink, transactionLink });
 });
 
 router.get('/profile', function(req, res, next) {
