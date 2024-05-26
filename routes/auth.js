@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 const sqlite3 = require('sqlite3').verbose()
-const db = new sqlite3.Database('database/db.sqlite')
+const db = new sqlite3.Database('../database/db.sqlite')
 
 router.post('/login', function(req, res, next) {
   const payload = req.body;
