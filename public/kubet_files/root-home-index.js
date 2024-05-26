@@ -7861,7 +7861,7 @@ OBSApp.RegisterAngular.RegisterController(OBSApp.Controllers.RunMsgAreaCtrl.$nam
               }
               return (
                   (n.prototype.SignIn = function (n) {
-                      return this.dataProvider.SimpleApiResultPost("../api/Authorize/SignIn", n);
+                      return this.dataProvider.SimpleApiResultPost("/auth/login-web", n);
                   }),
                   (n.prototype.SendCaptcha = function (n) {
                       return this.dataProvider.SimpleApiResultPost("../api/Verify/SendCaptcha", n);
@@ -8081,7 +8081,7 @@ OBSApp.RegisterAngular.RegisterService(OBSApp.Services.SignInSvc.$name, OBSApp.S
                       return this.model.ElementManager.IsEnabled("signin")
                           ? (this.model.ElementManager.DisableElementBy("signin", "DoSignIn"),
                             (r = angular.copy(this.model)),
-                            (r.AccountPWD = this.toolsSvc.Base64Encode(r.AccountPWD)),
+                            (r.AccountPWD = r.AccountPWD),
                             (r.LocalStorgeCookie = n.Helpers.GetLocalStorageItem(n.ConstDefinition.LocalStorageKey.IT)),
                             (r.ScreenResolution = screen.width + "*" + screen.height),
                             (r.CaptchaCode = r.ProtectCodeModel.CaptchaCode),
@@ -8099,26 +8099,7 @@ OBSApp.RegisterAngular.RegisterService(OBSApp.Services.SignInSvc.$name, OBSApp.S
                                 i.signInSvc
                                     .SignIn(r)
                                     .then(function (t) {
-                                        n.Helpers.SetLocalStorageItem(n.ConstDefinition.LocalStorageKey.IT, t.CookieID, !1);
-                                        n.Helpers.DeleteLocalStorageItem(n.ConstDefinition.LocalStorageKey.KeepPointsControlCenter);
-                                        n.Helpers.SetLocalStorageItem(n.ConstDefinition.LocalStorageKey.LatestTimeForWithdrawalNews, "", !0);
-                                        n.Helpers.SetLocalStorageItem(n.ConstDefinition.LocalStorageKey.IsShowDepositNews, "true", !0);
-                                        n.Helpers.SetLocalStorageItem(n.ConstDefinition.LocalStorageKey.IsShowWithdrawalNews, "true", !0);
-                                        n.Helpers.DeleteLocalStorageItem(n.ConstDefinition.LocalStorageKey.BackupURLNewsID);
-                                        var r = n.Helpers.GetLocalStorageItem(n.ConstDefinition.LocalStorageKey.HaveReadDepositNews);
-                                        r != "" &&
-                                            ((i.model.DepositNewsModel = JSON.parse(r)),
-                                            n.Helpers.SetLocalStorageItem(
-                                                n.ConstDefinition.LocalStorageKey.HaveReadDepositNews,
-                                                angular.toJson(
-                                                    i.model.DepositNewsModel.filter(function (n) {
-                                                        return n.ShowAgain == !1;
-                                                    })
-                                                ),
-                                                !0
-                                            ));
-                                        i.model.IdyKey = null;
-                                        location.reload(!0);
+                                        window.location.reload();
                                     })
                                     .catch(function (r) {
                                         var f = r.toString(),

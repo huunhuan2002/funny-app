@@ -23,6 +23,29 @@ router.post('/login', function(req, res, next) {
   });
 });
 
+router.post('/login-web', function(req, res, next) {
+  const payload = req.body;
+
+  db.serialize(() => {
+    const stmt = db.prepare('select * from accounts where username = ? and password = ?');
+    stmt.all([payload.AccountID.toLowerCase(), payload.AccountPWD], (err, rows) => {
+      if (rows.length) {
+        req.session.isLoggedIn = true;
+        req.session.username = rows[0].username;
+        req.session.price = rows[0].price;
+        res.status(200).json({ success: true });
+      } else {
+        const Error = {
+          "Code": 1002,
+          "Message": "Tài khoản hoặc mật khẩu sai"
+        };
+        res.status(400).json({Error})
+      }
+    })
+    stmt.finalize();
+  });
+});
+
 router.post('/register', function(req, res, next) {
   const payload = req.body;
 

@@ -46,11 +46,7 @@
     <meta name="ROBOTS" content="INDEX, FOLLOW" />
     <meta name="RATING" content="GENERAL" />
     <meta name="REVISIT-AFTER" content="1 DAYS" />
-    <link
-      rel="shortcut icon"
-      href="/images/favicon.ico"
-      type="image/x-icon"
-    />
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
     <!--Open Graph-->
     <meta property="og:type" content="website" />
     <meta
@@ -113,9 +109,7 @@
     aria-busy="false"
   >
     <div class="scroll-wrapper scrollbar-macosx">
-      <div
-        style="height: auto; max-height: 100%; overflow: auto;"
-      >
+      <div style="height: auto; max-height: 100%; overflow: auto">
         <a
           href="https://www.mykubet.com/"
           style="display: block; overflow: hidden; height: 0; width: 0"
@@ -300,35 +294,119 @@
             </div>
             <!-- ngIf: ctrl.model.NewsForImportantList && ctrl.model.NewsForImportantList.length > 0 -->
             <!-- ngIf: ctrl.model.LoginStatus == 0 || ctrl.model.LoginStatus == 1 -->
-            <div
-              class="loginArea ng-scope"
-              ng-if="ctrl.model.LoginStatus == 0 || ctrl.model.LoginStatus == 1"
-            >
-              <!-- ngIf: ctrl.IsFriendExist() || true --><a
-                class="btn_addMember fancybox ng-scope"
-                id="RegisterImmediate"
-                ng-if="ctrl.IsFriendExist() || true"
-                fbox-open="#MemberJoin"
-                fbox-auto-resize="true"
-                fbox-overlay-close="false"
-                fbox-focus="AccountID"
-                fbox-close-confirm="Bạn đăng ký chưa hoàn tất, có tiếp tục hay không？"
-                fbox-close-confirm-oktext="Tiếp tục"
-                fbox-close-confirm-canceltext="Thoát"
-                fbox-close-confirm-ok-button-class="fancybox-confirm-button"
-                fbox-close-confirm-cancel-button-class="fancybox-cancel-button"
-                >Đăng ký</a
-              ><!-- end ngIf: ctrl.IsFriendExist() || true -->
-              <a
-                class="btn_login fancybox"
-                id="loginbutton"
-                fbox-open="#login"
-                fbox-overlay-close="false"
-                fbox-close="ctrl.ResetSliderCaptcha()"
-                fbox-focus="accountId"
-                >Đăng nhập</a
+            <% if (!isLoggedIn) { %>
+              <div
+                class="loginArea ng-scope"
+                ng-if="ctrl.model.LoginStatus == 0 || ctrl.model.LoginStatus == 1"
               >
-            </div>
+                <!-- ngIf: ctrl.IsFriendExist() || true --><a
+                  class="btn_addMember fancybox ng-scope"
+                  id="RegisterImmediate"
+                  ng-if="ctrl.IsFriendExist() || true"
+                  fbox-open="#MemberJoin"
+                  fbox-auto-resize="true"
+                  fbox-overlay-close="false"
+                  fbox-focus="AccountID"
+                  fbox-close-confirm="Bạn đăng ký chưa hoàn tất, có tiếp tục hay không？"
+                  fbox-close-confirm-oktext="Tiếp tục"
+                  fbox-close-confirm-canceltext="Thoát"
+                  fbox-close-confirm-ok-button-class="fancybox-confirm-button"
+                  fbox-close-confirm-cancel-button-class="fancybox-cancel-button"
+                  >Đăng ký</a
+                ><!-- end ngIf: ctrl.IsFriendExist() || true -->
+                <a
+                  class="btn_login fancybox"
+                  id="loginbutton"
+                  fbox-open="#login"
+                  fbox-overlay-close="false"
+                  fbox-close="ctrl.ResetSliderCaptcha()"
+                  fbox-focus="accountId"
+                  >Đăng nhập</a
+                >
+              </div>
+            <% } else { %>
+              <div
+                class="memberArea ng-scope"
+              >
+                <ul>
+                  <li class="level1">
+                    <span class="ng-binding"
+                      >Đồng</span
+                    >
+                  </li>
+                  <li class="memberAC" id="UserMenu">
+                    <span
+                      class="ng-binding"
+                      ><%= username %></span
+                    >
+                  </li>
+                  <li style="position: relative;" id="GameMenu">
+                    <div class="btn_memberPMenu" style="font-size: 18px;">
+                      $ <span class="ng-binding"><%= price %></span>
+                    </div>
+                  </li>
+                  <!--平台轉帳Start-->
+                  <li>
+                    <!-- ngIf: ctrl.CheckTopMenuPermission('CanPlatfromTransfer') --><a
+                      class="memberFlow ng-scope"
+                      op-name="MemberCenter"
+                      op-width="950"
+                      op-height="700"
+                    >
+                      <span class="btn_RoundTextX">Chuyển quỹ</span> </a
+                    ><!-- end ngIf: ctrl.CheckTopMenuPermission('CanPlatfromTransfer') -->
+                    <!-- ngIf: !ctrl.CheckTopMenuPermission('CanPlatfromTransfer') -->
+                  </li>
+                  <!--平台轉帳End-->
+                  <!--存款Start-->
+                  <li>
+                    <a
+                      class="memberFlow ng-scope"
+                      href="/mobile/recharge"
+                    >
+                      <span class="btn_RoundTextY">Nạp tiền</span> </a
+                    ><!-- end ngIf: ctrl.IsDepositOpen() -->
+                    <!-- ngIf: !ctrl.IsDepositOpen() -->
+                  </li>
+                  <!--存款End-->
+                  <!--提款Start-->
+                  <li>
+                    <!-- ngIf: ctrl.IsWithdrawalOpen() --><a
+                      class="memberFlow ng-scope"
+                      href="#"
+                    >
+                      <span class="btn_RoundTextZ">Rút tiền</span> </a
+                    ><!-- end ngIf: ctrl.IsWithdrawalOpen() -->
+                    <!-- ngIf: !ctrl.IsWithdrawalOpen() -->
+                  </li>
+                  <!--提款End-->
+                  <!--會員中心Start-->
+                  <li>
+                    <a
+                      class="memberCtrl"
+                      href="/mobile/profile"
+                    >
+                      <span class="btn_member"></span>
+                      <div class="RoundText_prompt">
+                        <div class="RT_promptText">Hội viên</div>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      id="signout"
+                      class="memberCtrl"
+                      href="/auth/logout"
+                    >
+                      <span class="btn_signout"></span>
+                      <div class="RoundText_prompt">
+                        <div class="RT_promptText">Đăng xuất</div>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            <% } %>
             <!-- end ngIf: ctrl.model.LoginStatus == 0 || ctrl.model.LoginStatus == 1 -->
             <!-- ngIf: ctrl.model.LoginStatus == 2 -->
             <!-- ngRepeat: row in ctrl.model.AllGameNames -->
@@ -4881,8 +4959,7 @@
         background-color: #eeeded;
       }
       .sentCellCode.voice {
-        background: #e33c40 url(/images/btn_voice.png)
-          no-repeat 90% 45%;
+        background: #e33c40 url(/images/btn_voice.png) no-repeat 90% 45%;
         padding: 0 20px 0 6px;
       }
       .sentCellCode.off {
@@ -4891,8 +4968,7 @@
         color: #555;
       }
       .sentCellCode.off.voice {
-        background: #eeeded url(/images/btn_voice.png)
-          no-repeat 90% 45%;
+        background: #eeeded url(/images/btn_voice.png) no-repeat 90% 45%;
         padding: 0 20px 0 6px;
         width: 111px;
       }
