@@ -30,8 +30,11 @@ router.post('/login', async function(req, res, next) {
     } else {
       res.status(400).json({ success: false })
     }
+
+    connection.end();
   } catch (error) {
     res.status(400).json({ success: false })
+    connection.end();
   }
 });
 
@@ -52,8 +55,11 @@ router.post('/login-web', async function(req, res, next) {
     } else {
       res.status(400).json({ success: false })
     }
+
+    connection.end();
   } catch (error) {
     res.status(400).json({ success: false })
+    connection.end();
   }
 });
 
@@ -67,8 +73,10 @@ router.post('/register', async function(req, res, next) {
     const connection = await getConnection();
     await connection.query(q, params);
     res.redirect('/');
+    connection.end();
   } catch (error) {
     res.redirect('/');
+    connection.end();
   }
 });
 
