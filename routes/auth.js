@@ -1,58 +1,62 @@
 var express = require('express');
 var router = express.Router();
+var mysql = require('mysql')
 
-const sqlite3 = require('sqlite3').verbose()
-const db = new sqlite3.Database('../database/db.sqlite')
+require('dotenv').config()
+
+const connection = mysql.createConnection({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PWD,
+  database: process.env.DB_SCHEMA
+})
+
+connection.connect()
 
 router.post('/login', function(req, res, next) {
   const payload = req.body;
-
-  db.serialize(() => {
-    const stmt = db.prepare('select * from accounts where username = ? and password = ?');
-    stmt.all([payload.username.toLowerCase(), payload.password], (err, rows) => {
-      console.log('rows', rows);
-      if (rows.length) {
-        req.session.isLoggedIn = true;
-        req.session.username = rows[0].username;
-        res.status(200).json({ success: true });
-      } else {
-        res.status(400).json({ success: false })
-      }
-    })
-    stmt.finalize();
+  const q = 'select * from accounts where username = ? and password = ?';
+  const params = [payload.username.toLowerCase(), payload.password];
+  connection.query(q, params, function(err, rows) {
+    if (rows.length) {
+      req.session.isLoggedIn = true;
+      req.session.username = rows[0].username;
+      req.session.price = rows[0].price;
+      res.status(200).json({ success: true });
+    } else {
+      res.status(400).json({ success: false })
+    }
   });
 });
 
 router.post('/login-web', function(req, res, next) {
   const payload = req.body;
 
-  db.serialize(() => {
-    const stmt = db.prepare('select * from accounts where username = ? and password = ?');
-    stmt.all([payload.AccountID.toLowerCase(), payload.AccountPWD], (err, rows) => {
-      if (rows.length) {
-        req.session.isLoggedIn = true;
-        req.session.username = rows[0].username;
-        req.session.price = rows[0].price;
-        res.status(200).json({ success: true });
-      } else {
+  const q = 'select * from accounts where username = ? and password = ?';
+  const params = [payload.AccountID.toLowerCase(), payload.AccountPWD];
+  connection.query(q, params, function(err, rows) {
+    console.log('row', rows);
+    if (rows.length) {
+      req.session.isLoggedIn = true;
+      req.session.username = rows[0].username;
+      req.session.price = rows[0].price;
+      res.status(200).json({ success: true });
+    } else {
         const Error = {
           "Code": 1002,
           "Message": "Tài khoản hoặc mật khẩu sai"
         };
         res.status(400).json({Error})
-      }
-    })
-    stmt.finalize();
+    }
   });
 });
 
 router.post('/register', function(req, res, next) {
   const payload = req.body;
 
-  db.serialize(() => {
-    const stmt = db.prepare('INSERT INTO accounts VALUES (?, ?, ?, ?)');
-    stmt.run(payload.username, payload.password, payload.phone, 0);
-    stmt.finalize();
+  const q = 'INSERT INTO accounts VALUES (?, ?, ?, ?)';
+  const params = [payload.username, payload.password, payload.phone, 0];
+  connection.query(q, params, function(err, rows) {
     res.redirect('/');
   });
 });
