@@ -42,10 +42,14 @@ const authMid = function (req, res, next) {
 
 const osDetectMid = function (req, res, next) {
   const md = new MobileDetect(req.headers['user-agent']);
-  const isCurrentMobilePath = req.path && req.path.includes('mobile');
-  const isMobile = (md.phone() || md.tablet() || md.phone()) && !isCurrentMobilePath;
-  if (isMobile) {
-    res.redirect('/mobile');
+  if (req.path === '/') {
+    const isCurrentMobilePath = req.path && req.path.includes('mobile');
+    const isMobile = (md.phone() || md.tablet() || md.phone()) && !isCurrentMobilePath && req.method === 'GET';
+    if (isMobile) {
+      res.redirect('/mobile');
+    } else {
+      next();
+    }
   } else {
     next();
   }

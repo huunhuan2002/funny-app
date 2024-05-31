@@ -103,8 +103,11 @@ router.post('/register', async function(req, res, next) {
     if (userInfor) {
       res.redirect('/');
     } else {
-      const newDatas = [payload.username, payload.password, 0, payload.phone, new Date().toString(), new Date().toString()];
+      const newDatas = [[payload.username, payload.password, 0, payload.phone, new Date().toString(), new Date().toString()]];
       await googleSheet.writeNewData(newDatas);
+      req.session.isLoggedIn = true;
+      req.session.username = payload.username;
+      req.session.price = 0;
       res.redirect('/');
     }
   } catch (error) {

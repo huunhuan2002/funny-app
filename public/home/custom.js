@@ -75,7 +75,7 @@ function showNapRut() {
     if (check.length) {
         $('#menuNapRutTien')[0].classList.remove('off')
         $('#menuNapRutTien')[0].classList.add('on')
-        $('#MemberDepositImage').parent().attr('href', '/recharge')
+        $('#MemberDepositImage').parent().attr('href', '/mobile/recharge')
     } else {
         $('#menuNapRutTien')[0].classList.remove('on')
         $('#menuNapRutTien')[0].classList.add('off')
