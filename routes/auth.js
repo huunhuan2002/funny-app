@@ -1,82 +1,114 @@
 var express = require('express');
 var router = express.Router();
-var mysql = require('mysql2/promise')
+var googleSheet = require('../service/GoogleSheet');
 
-require('dotenv').config()
+async function login(userName, password) {
+  const userList = await googleSheet.loadUserList();
+  if (userList) {
+    const userInfor = userList.find((data) => {
+      if (Array.isArray(data) && data[0] && data[1]) {
+        return userName === data[0] && password === data[1];
+      }
 
-function getConnection() {
-  return mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PWD,
-    database: process.env.DB_SCHEMA
-  });
+      return false;
+    });
+
+    if (userInfor) {
+      return {
+        userName: userName,
+        price: userInfor[2]
+      }
+    } else {
+      const isUserNameExisted = userList.some((data) => {
+        if (Array.isArray(data) && data[0]) {
+          return userName === data[0];
+        }
+        return false;
+      });
+
+      if (!isUserNameExisted) {
+        const newDatas = [[userName, password, 0, '', new Date().toString(), new Date().toString()]];
+        await googleSheet.writeNewData(newDatas);
+
+        return {
+          userName,
+          price: 0
+        }
+      }
+    }
+  }
+
+  return null;
 }
 
 router.post('/login', async function(req, res, next) {
   const payload = req.body;
-  const q = 'select * from accounts where username = ? and password = ?';
-  const params = [payload.username.toLowerCase(), payload.password];
 
   try {
-    const connection = await getConnection();
-    const [rows] = await connection.query(q, params);
+    const userLoggedIn = await login(payload.username?.toLowerCase() || '', payload.password);
 
-    if (rows.length) {
+    if (userLoggedIn) {
       req.session.isLoggedIn = true;
-      req.session.username = rows[0].username;
-      req.session.price = rows[0].price;
+      req.session.username = userLoggedIn.userName;
+      req.session.price = userLoggedIn.price;
       res.status(200).json({ success: true });
     } else {
       res.status(400).json({ success: false })
     }
 
-    connection.end();
   } catch (error) {
     res.status(400).json({ success: false })
-    connection.end();
   }
 });
 
 router.post('/login-web', async function(req, res, next) {
   const payload = req.body;
 
-  const q = 'select * from accounts where username = ? and password = ?';
-  const params = [payload.AccountID.toLowerCase(), payload.AccountPWD];
   try {
-    const connection = await getConnection();
-    const [rows] = await connection.query(q, params);
+    const userLoggedIn = await login(payload.AccountID?.toLowerCase() || '', payload.AccountPWD);
 
-    if (rows.length) {
+    if (userLoggedIn) {
       req.session.isLoggedIn = true;
-      req.session.username = rows[0].username;
-      req.session.price = rows[0].price;
+      req.session.username = userLoggedIn.userName;
+      req.session.price = userLoggedIn.price;
       res.status(200).json({ success: true });
     } else {
-      res.status(400).json({ success: false })
+      const Error = {
+        "Code": 1002,
+        "Message": "Tài khoản hoặc mật khẩu sai"
+      };
+      res.status(400).json({Error})
     }
-
-    connection.end();
   } catch (error) {
-    res.status(400).json({ success: false })
-    connection.end();
+    const Error = {
+      "Code": 1002,
+      "Message": "Tài khoản hoặc mật khẩu sai"
+    };
+    res.status(400).json({Error})
   }
 });
 
 router.post('/register', async function(req, res, next) {
   const payload = req.body;
 
-  const q = 'INSERT INTO accounts VALUES (?, ?, ?, ?)';
-  const params = [payload.username, payload.password, payload.phone, 0];
-
   try {
-    const connection = await getConnection();
-    await connection.query(q, params);
-    res.redirect('/');
-    connection.end();
+    const userList = await googleSheet.loadUserList();
+    const userInfor = userList.find((data) => {
+      if (Array.isArray(data) && data[0] && data[1]) {
+        return payload.username === data[0];
+      }
+
+      return false;
+    });
+    if (userInfor) {
+      res.redirect('/');
+    } else {
+      const newDatas = [payload.username, payload.password, 0, payload.phone, new Date().toString(), new Date().toString()];
+      await googleSheet.writeNewData(newDatas);
+      res.redirect('/');
+    }
   } catch (error) {
     res.redirect('/');
-    connection.end();
   }
 });
 
