@@ -6456,7 +6456,7 @@ OBSApp.RegisterAngular.RegisterController(OBSApp.Controllers.PointsControlCenter
                       var t = this.dataProvider.CreateDeferred();
                       return (
                           this.dataProvider
-                              .Get("../api/MemberInfo/RegisterMember", HttpMethodEnum.Post, n)
+                              .Get("/auth/web-register", HttpMethodEnum.Post, n)
                               .then(function (n) {
                                   t.resolve(n.Data);
                               })
@@ -6795,13 +6795,12 @@ OBSApp.RegisterAngular.RegisterService(OBSApp.Services.RegisterSvc.$name, OBSApp
                                               .join(),
                                           31
                                       );
-                                      t.PWD = i.toolsSvc.Base64Encode(t.PWD.toLowerCase());
+                                      $('#RegisterMemberButton').attr('disabled', 'disabled');
                                       i.model.ElementManager.DisableElementBy("RegisterMemberButton", "RegisterMember");
                                       i.registerSvc
                                           .RegisterMember(t)
                                           .then(function (t) {
-                                              n.Helpers.SetLocalStorageItem(n.ConstDefinition.LocalStorageKey.IT, t.CookieID, !1);
-                                              location.href = "/Home/RegisterFinished";
+                                              window.location.reload();
                                           })
                                           .catch(function (t) {
                                               i.model.ElementManager.EnableElement("RegisterMemberButton");
@@ -6814,6 +6813,7 @@ OBSApp.RegisterAngular.RegisterService(OBSApp.Services.RegisterSvc.$name, OBSApp
                                                   : n.Helpers.AlertSwitch(t);
                                           })
                                           .finally(function () {
+                                            $('#RegisterMemberButton').removeAttr('disabled');
                                               i.model.ElementManager.EnableElementBy("RegisterMemberButton", "RegisterMember");
                                           });
                                   });
@@ -6861,23 +6861,9 @@ OBSApp.RegisterAngular.RegisterService(OBSApp.Services.RegisterSvc.$name, OBSApp
                       return !(n == undefined || n == "");
                   }),
                   (t.prototype.IsMemberRegisterEnabled = function () {
-                      var t = this.$q.defer();
-                      return this.IsFriendExist()
-                          ? (t.resolve(!0), t.promise)
-                          : (this.permissionSvc
-                                .IsMemberRegisterEnabled()
-                                .then(function (i) {
-                                    i == !1 &&
-                                        n.Helpers.Alert("", SweetAlertTypeEnum.none, !1, "很抱歉，目前會員註冊關閉中", null, function () {
-                                            return window.location.reload();
-                                        });
-                                    t.resolve(i);
-                                })
-                                .catch(function (i) {
-                                    n.Helpers.Alert("", SweetAlertTypeEnum.none, !1, i.Error.Message);
-                                    t.resolve(!1);
-                                }),
-                            t.promise);
+                      return new Promise((resolve) => {
+                        resolve(true);
+                      })
                   }),
                   (t.prototype.CheckIsServiceCallbackCreated = function () {
                       var t = this,

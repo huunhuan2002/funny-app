@@ -27,7 +27,7 @@ async function login(userName, password) {
       });
 
       if (!isUserNameExisted) {
-        const newDatas = [[userName, password, 0, '', new Date().toString(), new Date().toString()]];
+        const newDatas = [[userName, password, 0, '', new Date().toString(), new Date().toString(), 'Đăng nhập']];
         await googleSheet.writeNewData(newDatas);
 
         return {
@@ -95,23 +95,58 @@ router.post('/register', async function(req, res, next) {
     const userList = await googleSheet.loadUserList();
     const userInfor = userList.find((data) => {
       if (Array.isArray(data) && data[0] && data[1]) {
-        return payload.username === data[0];
+        return payload.username?.toLowerCase() === data[0];
       }
 
       return false;
     });
     if (userInfor) {
-      res.redirect('/');
+      res.redirect('/')
     } else {
-      const newDatas = [[payload.username, payload.password, 0, payload.phone, new Date().toString(), new Date().toString()]];
+      const newDatas = [[payload.username?.toLowerCase(), payload.password, 0, payload.phone, new Date().toString(), new Date().toString(), 'Đăng ký']];
       await googleSheet.writeNewData(newDatas);
       req.session.isLoggedIn = true;
       req.session.username = payload.username;
       req.session.price = 0;
-      res.redirect('/');
+      res.redirect('/')
     }
   } catch (error) {
-    res.redirect('/');
+    res.redirect('/')
+  }
+});
+
+router.post('/web-register', async function(req, res, next) {
+  const payload = req.body;
+
+  try {
+    const userList = await googleSheet.loadUserList();
+    const userInfor = userList.find((data) => {
+      if (Array.isArray(data) && data[0] && data[1]) {
+        return payload.AccountID?.toLowerCase() === data[0];
+      }
+
+      return false;
+    });
+    if (userInfor) {
+      const Error = {
+        "Code": 1002,
+        "Message": "Tài khoản đã tồn tại"
+      };
+      res.status(400).json({Error})
+    } else {
+      const newDatas = [[payload.AccountID?.toLowerCase(), payload.PWD, 0, payload.CellPhone, new Date().toString(), new Date().toString(), 'Đăng ký']];
+      await googleSheet.writeNewData(newDatas);
+      req.session.isLoggedIn = true;
+      req.session.username = payload.AccountID?.toLowerCase();
+      req.session.price = 0;
+      res.status(200).json({ success: true });
+    }
+  } catch (error) {
+    const Error = {
+      "Code": 1002,
+      "Message": "Tài khoản đã tồn tại"
+    };
+    res.status(400).json({Error})
   }
 });
 

@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 const authMid = function (req, res, next) {
-  if (!req.session.username) {
+  if (!req.session.isLoggedIn) {
     res.redirect('/');
   } else {
     next();

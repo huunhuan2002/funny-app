@@ -297,11 +297,12 @@
             <% if (!isLoggedIn) { %>
               <div
                 class="loginArea ng-scope"
-                ng-if="ctrl.model.LoginStatus == 0 || ctrl.model.LoginStatus == 1"
               >
-                <!-- ngIf: ctrl.IsFriendExist() || true --><a
+                <!-- ngIf: ctrl.IsFriendExist() || true -->
+                <a
                   class="btn_addMember fancybox ng-scope"
-                  href="/mobile/register"
+                  id="RegisterImmediate"
+                  fbox-open="#MemberJoin"
                   >Đăng ký</a
                 ><!-- end ngIf: ctrl.IsFriendExist() || true -->
                 <a
@@ -3479,17 +3480,10 @@
                       id="AccountID"
                       name="AccountID"
                       maxlength="10"
-                      ng-class="ctrl.model.ShowType==Models.RegisterViewModel.ShowTypeEnum.ACCOUNT_EXIST ? &#39;memberACInput&#39;:&#39;&#39;"
+                      required="true"
                       placeholder="4 ~ 10 ký tự chữ và số"
                       ckspace="true"
-                      ckaccountrulewithregister="true"
-                      ckaccountexist="true"
-                      validate-input-reg-custom="^[A-Za-z0-9]{0,10}$"
                       ng-trim="false"
-                      ng-focus="ctrl.RegisterPWDOnFocus();ctrl.OpenMousemoveKeep()"
-                      ng-blur="ctrl.RegisterPWDOnBlur();ctrl.VerifyAccountIDOnBlur();ctrl.CloseMousemoveKeep()"
-                      ng-keyup="ctrl.CheckValid($event)"
-                      ng-change="ctrl.VerifyAccountIDOnChange()"
                       ng-model="ctrl.model.CreateModel.AccountID"
                       capitalize=""
                       class="ng-pristine ng-untouched ng-valid ng-isolate-scope ng-empty ng-valid-maxlength"
@@ -3528,13 +3522,9 @@
                       id="NickName"
                       name="NickName"
                       ng-model="ctrl.model.CreateModel.NickName"
-                      ng-change="ctrl.CheckValid($event)"
                       maxlength="10"
                       placeholder="Nhập tối đa 8 ký tự"
                       cknickname="true"
-                      on-blur-trim-and-replace-double-space=""
-                      ng-disabled="ctrl.InputDisabled()"
-                      validate-input-reg-custom="^$|^[·a-zA-Z0-9_ÁĂẮẶẰẲẴǍÂẤẬẦẨẪÄǞȦǠẠȀÀẢȂĀĄÅǺḀȺÃꜲÆǼǢꜴꜶꜸꜺꜼḂḄƁḆɃƂĆČÇḈĈĊƇȻĎḐḒḊḌƊḎǲǅĐƋǱǄÉĔĚȨḜÊẾỆỀỂỄḘËĖẸȄÈẺȆĒḖḔĘɆẼḚꝪḞƑǴĞǦĢĜĠƓḠǤḪȞḨĤⱧḦḢḤĦÍĬǏÎÏḮİỊȈÌỈȊĪĮƗĨḬꝹꝻꝽꞂꞄꞆꝬĴɈḰǨĶⱩꝂḲƘḴꝀꝄĹȽĽĻḼḶḸⱠꝈḺĿⱢǈŁǇḾṀṂⱮŃŇŅṊṄṆǸƝṈȠǋÑǊÓŎǑÔỐỘỒỔỖÖȪȮȰỌŐȌÒỎƠỚỢỜỞỠȎꝊꝌŌṒṐƟǪǬØǾÕṌṎȬƢꝎƐƆȢṔṖꝒƤꝔⱣꝐꝘꝖŔŘŖṘṚṜȐȒṞɌⱤꜾƎŚṤŠṦŞŜȘṠṢṨŤŢṰȚȾṪṬƬṮƮŦⱯꞀƜɅꜨÚŬǓÛṶÜǗǙǛǕṲỤŰȔÙỦƯỨỰỪỬỮȖŪṺŲŮŨṸṴꝞṾƲṼꝠẂŴẄẆẈẀⱲẌẊÝŶŸẎỴỲƳỶỾȲɎỸŹŽẐⱫŻẒȤẔƵĲŒᴀᴁʙᴃᴄᴅᴇꜰɢʛʜɪʁᴊᴋʟᴌᴍɴᴏɶᴐᴕᴘʀᴎᴙꜱᴛⱻᴚᴜᴠᴡʏᴢáăắặằẳẵǎâấậầẩẫäǟȧǡạȁàảȃāąᶏẚåǻḁⱥãꜳæǽǣꜵꜷꜹꜻꜽḃḅɓḇᵬᶀƀƃɵćčçḉĉɕċƈȼďḑḓȡḋḍɗᶑḏᵭᶁđɖƌıȷɟʄǳǆéĕěȩḝêếệềểễḙëėẹȅèẻȇēḗḕⱸęᶒɇẽḛꝫḟƒᵮᶂǵğǧģĝġɠḡᶃǥḫȟḩĥⱨḧḣḥɦẖħƕíĭǐîïḯịȉìỉȋīįᶖɨĩḭꝺꝼᵹꞃꞅꞇꝭǰĵʝɉḱǩķⱪꝃḳƙḵᶄꝁꝅĺƚɬľļḽȴḷḹⱡꝉḻŀɫᶅɭłǉſẜẛẝḿṁṃɱᵯᶆńňņṋȵṅṇǹɲṉƞᵰᶇɳñǌóŏǒôốộồổỗöȫȯȱọőȍòỏơớợờởỡȏꝋꝍⱺōṓṑǫǭøǿõṍṏȭƣꝏɛᶓɔᶗȣṕṗꝓƥᵱᶈꝕᵽꝑꝙʠɋꝗŕřŗṙṛṝȑɾᵳȓṟɼᵲᶉɍɽↄꜿɘɿśṥšṧşŝșṡṣṩʂᵴᶊȿɡᴑᴓᴝťţṱțȶẗⱦṫṭƭṯᵵƫʈŧᵺɐᴂǝᵷɥʮʯᴉʞꞁɯɰᴔɹɻɺⱹʇʌʍʎꜩúŭǔûṷüǘǚǜǖṳụűȕùủưứựừửữȗūṻųᶙůũṹṵᵫꝸⱴꝟṿʋᶌⱱṽꝡẃŵẅẇẉẁⱳẘẍẋᶍýŷÿẏỵỳƴỷỿȳẙɏỹźžẑʑⱬżẓȥẕᵶᶎʐƶɀﬀﬃﬄﬁﬂĳœﬆₐₑᵢⱼₒᵣᵤᵥₓ][·a-zA-Z0-9_ÁĂẮẶẰẲẴǍÂẤẬẦẨẪÄǞȦǠẠȀÀẢȂĀĄÅǺḀȺÃꜲÆǼǢꜴꜶꜸꜺꜼḂḄƁḆɃƂĆČÇḈĈĊƇȻĎḐḒḊḌƊḎǲǅĐƋǱǄÉĔĚȨḜÊẾỆỀỂỄḘËĖẸȄÈẺȆĒḖḔĘɆẼḚꝪḞƑǴĞǦĢĜĠƓḠǤḪȞḨĤⱧḦḢḤĦÍĬǏÎÏḮİỊȈÌỈȊĪĮƗĨḬꝹꝻꝽꞂꞄꞆꝬĴɈḰǨĶⱩꝂḲƘḴꝀꝄĹȽĽĻḼḶḸⱠꝈḺĿⱢǈŁǇḾṀṂⱮŃŇŅṊṄṆǸƝṈȠǋÑǊÓŎǑÔỐỘỒỔỖÖȪȮȰỌŐȌÒỎƠỚỢỜỞỠȎꝊꝌŌṒṐƟǪǬØǾÕṌṎȬƢꝎƐƆȢṔṖꝒƤꝔⱣꝐꝘꝖŔŘŖṘṚṜȐȒṞɌⱤꜾƎŚṤŠṦŞŜȘṠṢṨŤŢṰȚȾṪṬƬṮƮŦⱯꞀƜɅꜨÚŬǓÛṶÜǗǙǛǕṲỤŰȔÙỦƯỨỰỪỬỮȖŪṺŲŮŨṸṴꝞṾƲṼꝠẂŴẄẆẈẀⱲẌẊÝŶŸẎỴỲƳỶỾȲɎỸŹŽẐⱫŻẒȤẔƵĲŒᴀᴁʙᴃᴄᴅᴇꜰɢʛʜɪʁᴊᴋʟᴌᴍɴᴏɶᴐᴕᴘʀᴎᴙꜱᴛⱻᴚᴜᴠᴡʏᴢáăắặằẳẵǎâấậầẩẫäǟȧǡạȁàảȃāąᶏẚåǻḁⱥãꜳæǽǣꜵꜷꜹꜻꜽḃḅɓḇᵬᶀƀƃɵćčçḉĉɕċƈȼďḑḓȡḋḍɗᶑḏᵭᶁđɖƌıȷɟʄǳǆéĕěȩḝêếệềểễḙëėẹȅèẻȇēḗḕⱸęᶒɇẽḛꝫḟƒᵮᶂǵğǧģĝġɠḡᶃǥḫȟḩĥⱨḧḣḥɦẖħƕíĭǐîïḯịȉìỉȋīįᶖɨĩḭꝺꝼᵹꞃꞅꞇꝭǰĵʝɉḱǩķⱪꝃḳƙḵᶄꝁꝅĺƚɬľļḽȴḷḹⱡꝉḻŀɫᶅɭłǉſẜẛẝḿṁṃɱᵯᶆńňņṋȵṅṇǹɲṉƞᵰᶇɳñǌóŏǒôốộồổỗöȫȯȱọőȍòỏơớợờởỡȏꝋꝍⱺōṓṑǫǭøǿõṍṏȭƣꝏɛᶓɔᶗȣṕṗꝓƥᵱᶈꝕᵽꝑꝙʠɋꝗŕřŗṙṛṝȑɾᵳȓṟɼᵲᶉɍɽↄꜿɘɿśṥšṧşŝșṡṣṩʂᵴᶊȿɡᴑᴓᴝťţṱțȶẗⱦṫṭƭṯᵵƫʈŧᵺɐᴂǝᵷɥʮʯᴉʞꞁɯɰᴔɹɻɺⱹʇʌʍʎꜩúŭǔûṷüǘǚǜǖṳụűȕùủưứựừửữȗūṻųᶙůũṹṵᵫꝸⱴꝟṿʋᶌⱱṽꝡẃŵẅẇẉẁⱳẘẍẋᶍýŷÿẏỵỳƴỷỿȳẙɏỹźžẑʑⱬżẓȥẕᵶᶎʐƶɀﬀﬃﬄﬁﬂĳœﬆₐₑᵢⱼₒᵣᵤᵥₓ\s]{0,7}$"
                       ng-trim="false"
                       class="ng-pristine ng-untouched ng-valid ng-isolate-scope ng-empty ng-valid-maxlength"
                     />
@@ -3548,21 +3538,14 @@
                       type="text"
                       id="PWD"
                       name="PWD"
+                      required="true"
                       ng-model="ctrl.model.CreateModel.PWD"
-                      ng-keyup="ctrl.CheckValid($event)"
-                      ng-focus="ctrl.RegisterPWDOnFocus()"
-                      ng-blur="ctrl.RegisterPWDOnBlur()"
                       tips-content="Mật khẩu tối đa 10 ký tự !"
                       max-length="10"
                       placeholder="6 ~ 10 ký tự chữ và số"
-                      cksamepasswordbyregister="true"
-                      cksimplepasswordbyregister="true"
-                      ckpassword="true"
                       disableautocomplete=""
                       autocomplete="off"
-                      validate-input-reg-custom="^[A-Za-z0-9]{0,10}$"
                       ng-trim="false"
-                      ng-disabled="ctrl.InputDisabled()"
                       password-eye="true"
                       class="ng-pristine ng-untouched ng-valid ng-isolate-scope ellipsis ng-empty disc"
                     />
@@ -3590,138 +3573,23 @@
                           type="text"
                           placeholder="10 chữ số"
                           ng-model="ctrl.model.CreateModel.CellPhone"
-                          ng-disabled="!ctrl.model.ElementManager.IsEnabled(&#39;txtRegCellPhone&#39;) || ctrl.model.IsCaptchaCodeVerified"
-                          ng-change="ctrl.VerifyCellPhone()"
-                          ng-keyup="ctrl.CheckValid($event)"
                           required=""
-                          ckcellphoneverify="true"
-                          validate-input-reg-custom="^[0-9]*$"
                           ng-trim="false"
                           aria-required="true"
                         />
-                      </div>
-                      <div class="popList_verR">
-                        <!-- 短信按鈕 -->
-                        <!-- ngIf: ctrl.model.ElementManager.IsVisible('sendCaptchaButton') && !ctrl.model.IsCaptchaCodeVerified --><input
-                          type="button"
-                          id="sendCaptchaButton"
-                          ng-if="ctrl.model.ElementManager.IsVisible(&#39;sendCaptchaButton&#39;) &amp;&amp; !ctrl.model.IsCaptchaCodeVerified"
-                          ng-class="ctrl.GetSendCaptchaButtonClass()"
-                          ng-disabled="!ctrl.IsSendCaptchaButtonEnabled()"
-                          ng-valid-click="ctrl.SendCaptchaButtonClick()"
-                          ajax-submit-auto-disable-v2="Đang gửi"
-                          is-auto-disabled="false"
-                          requiredvalid="txtRegCellPhone"
-                          original-name="Gửi mã"
-                          ng-value="ctrl.model.SendCaptchaButtonName"
-                          class="ng-scope verCode_Msg"
-                          value="Gửi mã"
-                          disabled="disabled"
-                        /><!-- end ngIf: ctrl.model.ElementManager.IsVisible('sendCaptchaButton') && !ctrl.model.IsCaptchaCodeVerified -->
-                        <!-- ngIf: !ctrl.model.ElementManager.IsVisible('sendCaptchaButton') && !ctrl.model.IsCaptchaCodeVerified -->
-                        <!-- ngIf: ctrl.model.IsCaptchaCodeVerified -->
                       </div>
                     </div>
                     <!-- ngIf: !ctrl.model.ElementManager.IsVisible('sendCaptchaButton') && !ctrl.model.IsCaptchaCodeVerified -->
                   </div>
                 </li>
-                <li>
-                  <span class="popList_T">Mã xác nhận</span>
-                  <div>
-                    <div class="popList_verify">
-                      <div class="popList_verL">
-                        <!-- ngIf: ctrl.model.ElementManager.IsVisible('RegisterCaptchaCode') --><input
-                          type="text"
-                          id="RegisterCaptchaCode"
-                          name="RegisterCaptchaCode"
-                          placeholder="4 Chữ số"
-                          ng-class="{&#39;popList_verW100_ok&#39; :ctrl.model.IsCaptchaCodeVerified, &#39;popList_verW100&#39;:!ctrl.model.IsCaptchaCodeVerified,&#39;fill-f3&#39;: ctrl.IsVerifyModeCallCustomerServiceOnly()}"
-                          ng-if="ctrl.model.ElementManager.IsVisible(&#39;RegisterCaptchaCode&#39;)"
-                          ng-model="ctrl.model.CreateModel.CaptchaCode"
-                          ng-disabled="ctrl.model.IsCaptchaCodeVerified || ctrl.IsVerifyModeCallCustomerServiceOnly()"
-                          ng-keyup="ctrl.CheckValid($event)"
-                          ng-change="ctrl.VerifyCaptchaChange()"
-                          maxlength="4"
-                          ckcaptchacodebyregister="true"
-                          disableautocomplete=""
-                          autocomplete="off"
-                          validate-input-reg-custom="^[0-9]*$"
-                          ng-trim="false"
-                          class="ng-pristine ng-untouched ng-valid ng-scope ng-isolate-scope ng-empty ng-valid-maxlength popList_verW100"
-                        /><!-- end ngIf: ctrl.model.ElementManager.IsVisible('RegisterCaptchaCode') -->
-                        <!--disabled-->
-                        <!-- ngIf: !ctrl.model.ElementManager.IsVisible('RegisterCaptchaCode') -->
-                      </div>
-                      <!-- ngIf: !ctrl.model.IsCaptchaCodeVerified -->
-                      <div
-                        class="popList_verR ng-scope"
-                        ng-if="!ctrl.model.IsCaptchaCodeVerified"
-                      >
-                        <!-- ngIf: ctrl.IsVerifyCaptchaCodeButtonEnabled() -->
-                        <!-- ngIf: !ctrl.IsVerifyCaptchaCodeButtonEnabled() --><input
-                          ng-if="!ctrl.IsVerifyCaptchaCodeButtonEnabled()"
-                          type="button"
-                          class="verCode_Msg ng-scope"
-                          ng-disabled="true"
-                          value="Gửi"
-                          disabled="disabled"
-                        /><!-- end ngIf: !ctrl.IsVerifyCaptchaCodeButtonEnabled() -->
-                      </div>
-                      <!-- end ngIf: !ctrl.model.IsCaptchaCodeVerified -->
-                    </div>
-                    <!-- ngIf: !ctrl.model.IsCaptchaCodeVerified && ctrl.model.ElementManager.IsEnabled('VerifiedEffectiveTime') -->
-                  </div>
-                </li>
               </ul>
               <div class="popList_line"></div>
-              <ul class="popList popList_register">
-                <li>
-                  <div
-                    class="checkBoxIn on"
-                    ng-click="ctrl.ChangeAgreement(&#39;AgreementOfReceiveSMS&#39;)"
-                    ng-class="ctrl.model.AgreementOfReceiveSMS"
-                  ></div>
-                  <div class="checkHint">
-                    Nhận thông tin khuyến mãi qua tin nhắn điện thoại
-                  </div>
-                </li>
-                <li>
-                  <div
-                    id="AgreementOfRule"
-                    ng-click="ctrl.ChangeAgreement(&#39;AgreementOfRule&#39;)"
-                    ng-class="ctrl.model.AgreementOfRule"
-                    class="checkBoxIn on"
-                  >
-                    <input
-                      type="hidden"
-                      name="agreementofrule"
-                      ng-value="ctrl.model.AgreementOfRule"
-                      autocomplete="off"
-                      value="checkBoxIn on"
-                    />
-                  </div>
-                  <div class="checkHint2">
-                    Tôi đã 18 tuổi, đồng thời đã đọc và đồng ý quy tắc cá cược
-                    <a
-                      class="servPage"
-                      open-window="/Home/GameTerms"
-                      op-width="800"
-                      op-height="600"
-                      op-scroll="true"
-                      op-title="Điều khoản"
-                      >Điều khoản</a
-                    >
-                  </div>
-                </li>
-              </ul>
               <input
                 id="RegisterMemberButton"
-                ng-disabled="!ctrl.model.ElementManager.IsEnabled(&#39;RegisterMemberButton&#39;)"
                 type="button"
                 class="sentOut"
                 value="Xác nhận"
                 ng-click="ctrl.RegisterMember()"
-                disabled="disabled"
               />
             </form>
           </div>
