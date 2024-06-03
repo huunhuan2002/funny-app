@@ -107,7 +107,7 @@
                         <div id="time" class="QRpay_time">13：23</div>
                     </div>
                     <div class="t_blue time-cu">
-                        <span class="font-blue">Thời gian hết hạn <%= expireStr %></span>
+                        <span class="font-blue">Thời gian hết hạn <span id="expire_time"></span></span>
                     </div>
                     <div id="QRImage" class="QRpay_codeB">
                         <div class="QRpay_img">
@@ -150,6 +150,18 @@
             QRBrokenText.style.display = "";
             QRpay.className += " off";
         }
+
+        const now = new Date();
+        now.setMinutes(now.getMinutes() + 15);
+        const expireTime = new Date(now);
+        const date = `${expireTime.getDate() < 10 ? '0' : ''}${expireTime.getDate()}`;
+        const month = `${expireTime.getMonth() + 1 < 10 ? '0' : ''}${expireTime.getMonth() + 1}`;
+        const minute = `${expireTime.getMinutes() < 10 ? '0' : ''}${expireTime.getMinutes()}`;
+        const hour = `${expireTime.getHours() < 10 ? '0' : ''}${expireTime.getHours()}`;
+        const expireStr = `${hour}:${minute} ${date}/${month}`;
+
+        const displayExpTime = document.getElementById('expire_time');
+        displayExpTime.innerText = expireStr;
 
         function HtmldeCode(s) {
             var div = document.createElement('div');
