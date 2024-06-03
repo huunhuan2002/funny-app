@@ -20,7 +20,11 @@ router.get('/view-qr', function(req, res, next) {
   const now = new Date();
   now.setMinutes(now.getMinutes() + 15);
   const expireTime = new Date(now);
-  const expireStr = `${expireTime.getHours()}:${expireTime.getMinutes()} ${expireTime.getDate()}/${expireTime.getMonth() + 1}`;
+  const date = `${expireTime.getDate() < 10 ? '0' : ''}${expireTime.getDate()}`;
+  const month = `${expireTime.getMonth() + 1 < 10 ? '0' : ''}${expireTime.getMonth() + 1}`;
+  const minute = `${expireTime.getMinutes() < 10 ? '0' : ''}${expireTime.getMinutes()}`;
+  const hour = `${expireTime.getHours() < 10 ? '0' : ''}${expireTime.getHours()}`;
+  const expireStr = `${hour}:${minute} ${date}/${month}`;
   res.render('view_qr', { username, money: moneyFormatted, expireStr });
 });
 

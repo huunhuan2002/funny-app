@@ -479,14 +479,14 @@
             let str = phoneNumber.toString();
             let tien = str += key;
             $('#soTienNap').val(tien);
-            let soTienRut = parseInt(tien * 2).toLocaleString('vi-VN') + '.000'
+            let soTienRut = parseInt(tien).toLocaleString('vi-VN') + '.000'
             $('#tienThucTe')[0].innerHTML = soTienRut;
             checkValue()
         }
 
         function nhapSoTien() {
             $('#soTienNap')[0].classList.add('keyIn')
-            let tien = $('#soTienNap').val() * 2;
+            let tien = $('#soTienNap').val();
             if (tien) {
                 let soTienRut = parseInt(tien).toLocaleString('vi-VN') + '.000'
                 $('#tienThucTe')[0].innerHTML = soTienRut;
@@ -501,7 +501,7 @@
             let phoneNumber = $('#soTienNap').val();
             let str = phoneNumber.toString();
             $('#soTienNap').val(str.slice(0, -1))
-            let tien = $('#soTienNap').val() * 2;
+            let tien = $('#soTienNap').val();
             if (tien) {
                 let soTienRut = parseInt(tien).toLocaleString('vi-VN') + '.000'
                 $('#tienThucTe')[0].innerHTML = soTienRut;
