@@ -17,7 +17,8 @@ router.get('/view-qr', function(req, res, next) {
   const username = req.session.username;
   const money = (req.session.money || 0) * 1000;
   const moneyFormatted = new Intl.NumberFormat('vi-VN').format(money);
-  res.render('view_qr', { username, money: moneyFormatted });
+  const QRURL = `https://img.vietqr.io/image/${process.env.BANKID}-${process.env.ACCOUNT_NO}-qr_only.png?amount=${money}&addInfo=${username}`
+  res.render('view_qr', { username, money: moneyFormatted, QRURL });
 });
 
 router.post('/update-payment', function(req, res) {
